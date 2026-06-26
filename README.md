@@ -1,203 +1,285 @@
-📋 Project Summary – Credit Card Fraud Detection Web Application
-🎯 Project Overview
-A complete, production‑ready web application for detecting fraudulent credit card transactions using machine learning. Built with Flask, Scikit‑learn, and Bootstrap.
+🚀 Credit Card Fraud Detection Web Application
+A complete end-to-end machine learning-powered web application for detecting fraudulent credit card transactions in real-time.
 
-✅ Completed Components
-1. Backend (Flask Application)
-app.py – Main Flask app with routes:
+Python Flask Scikit-learn License
 
-/ Home page
+📌 Project Overview
+This web application uses advanced machine learning algorithms to detect fraudulent credit card transactions. The system handles highly imbalanced datasets using techniques like SMOTE, Random Undersampling, and Class Weight Balancing. It provides real-time predictions through an intuitive web interface with comprehensive visualizations and model performance metrics.
 
-/dashboard Dashboard
-
-/predict Prediction
-
-/api/model-info API endpoint
-
-Error handling and logging
-
-Model loading and prediction logic
-
-Form validation and input processing
-
-2. Machine Learning Pipeline
-model/train_model.py – ML training pipeline:
-
-Data loading & preprocessing
-
-Feature scaling with StandardScaler
-
-Stratified train‑test split (80‑20)
-
-Imbalance handling: SMOTE, Random Undersampling, Class Weight Balancing
-
-Models: Logistic Regression (4 variants), Random Forest Classifier
-
-Evaluation metrics & visualization
-
-Model persistence (pickle)
-
-3. Frontend (HTML/CSS/Bootstrap)
-templates/index.html – Home page
-
-templates/dashboard.html – Analytics dashboard
-
-templates/predict.html – Prediction interface
-
-static/css/style.css – Custom styling (responsive, modern UI, animations)
-
-4. Documentation
-README.md – Comprehensive documentation
-
-QUICKSTART.md – Quick setup guide
-
-AWS_DEPLOYMENT.md – AWS EC2 deployment guide
-
-dataset/README.md – Dataset instructions
-
-5. Utilities
-requirements.txt – Python dependencies
-
-.gitignore – Git ignore rules
-
-test_setup.py – Setup verification script
-
-generate_sample_data.py – Sample data generator
-
-📊 Machine Learning Features
-Models Implemented
-Logistic Regression (4 variants: Original, SMOTE, Undersampling, Class Weight Balancing)
-
-Random Forest (100 estimators, balanced class weights, feature importance analysis)
-
-Evaluation Metrics
-Accuracy, Precision, Recall, F1‑Score
-
-ROC‑AUC Score, Confusion Matrix, ROC Curves
-
-Visualizations
-Class distribution chart
-
-ROC curves comparison
-
-Confusion matrix heatmap
-
-Feature importance chart (top 15)
-
-🌐 Web Application Features
-Home Page
-Project description
-
-Dataset overview with statistics
-
-Model information & highlights
-
-Dashboard
-Model comparison metrics table
-
-Interactive visualizations
-
-Performance analysis & insights
-
-Prediction Page
-Model selection dropdown
-
-Input form for 30 features (Time, V1–V28, Amount)
-
-Sample data buttons (legit & fraud)
-
-Real‑time prediction results with fraud probability visualization
-
-🛠️ Technical Stack
-Backend
-
-Flask 3.0.0
-
-scikit‑learn 1.3.2
-
-imbalanced‑learn 0.11.0
-
-pandas 2.1.4, numpy 1.26.2
-
-matplotlib 3.8.2, seaborn 0.13.0
-
-Frontend
-
-Bootstrap 5.3.0
-
-Font Awesome 6.4.0
-
-Custom CSS with animations
-
-Deployment
-
-Local: Python + Flask dev server
-
-Production: Gunicorn + Nginx (optional)
-
-Cloud: AWS EC2 (documented)
-
-📁 Project Structure
-Code
+Key Features
+✅ Multiple ML Algorithms: Logistic Regression and Random Forest Classifier
+✅ Imbalance Handling: SMOTE, Random Undersampling, and Class Weight Balancing
+✅ Real-time Predictions: Web-based interface for instant fraud detection
+✅ Comprehensive Metrics: Accuracy, Precision, Recall, F1-Score, ROC-AUC
+✅ Interactive Visualizations: Class distribution, ROC curves, confusion matrix, feature importance
+✅ Model Comparison: Side-by-side performance comparison of all models
+✅ Responsive Design: Mobile-friendly Bootstrap interface
+📂 Project Structure
 credit-card-fraud-app/
-├── app.py
-├── requirements.txt
-├── README.md
-├── QUICKSTART.md
-├── AWS_DEPLOYMENT.md
-├── test_setup.py
-├── generate_sample_data.py
-├── .gitignore
 │
+├── app.py                      # Flask application (main backend)
 ├── model/
-│   ├── train_model.py
-│   ├── model.pkl
-│   ├── scaler.pkl
-│   ├── all_models.pkl
-│   ├── results.pkl
-│   └── feature_importance.csv
-│
-├── templates/
-│   ├── index.html
-│   ├── dashboard.html
-│   └── predict.html
+│   ├── train_model.py          # ML model training script
+│   ├── model.pkl               # Trained Random Forest model (generated)
+│   ├── scaler.pkl              # Feature scaler (generated)
+│   ├── all_models.pkl          # All trained models (generated)
+│   ├── results.pkl             # Model evaluation results (generated)
+│   └── feature_importance.csv  # Feature importance data (generated)
 │
 ├── static/
-│   ├── css/style.css
-│   └── images/
+│   ├── css/
+│   │   └── style.css           # Custom CSS styles
+│   └── images/                 # Visualizations (generated)
 │       ├── class_distribution.png
 │       ├── confusion_matrix.png
 │       ├── roc_curves.png
 │       └── feature_importance.png
 │
-└── dataset/
-    ├── README.md
-    └── creditcard.csv
-🚀 Setup Instructions
-Install dependencies
+├── templates/
+│   ├── index.html              # Home page
+│   ├── dashboard.html          # Dashboard with metrics and visualizations
+│   └── predict.html            # Prediction page
+│
+├── dataset/
+│   └── creditcard.csv          # Dataset (download separately)
+│
+├── requirements.txt            # Python dependencies
+└── README.md                   # Project documentation
+🧠 Machine Learning Models
+Models Implemented
+Logistic Regression (with 4 variants)
 
-bash
+Original (Imbalanced data)
+SMOTE (Synthetic Minority Oversampling)
+Random Undersampling
+Class Weight Balancing
+Random Forest Classifier
+
+100 decision trees
+Balanced class weights
+Feature importance analysis
+Imbalance Handling Techniques
+SMOTE: Generates synthetic samples for the minority class
+Random Undersampling: Reduces majority class samples
+Class Weight Balancing: Adjusts model weights based on class frequency
+Evaluation Metrics
+Accuracy: Overall correctness of predictions
+Precision: Accuracy of fraud predictions
+Recall: Ability to detect all frauds (most important for fraud detection)
+F1-Score: Harmonic mean of precision and recall
+ROC-AUC: Model's discrimination ability
+Confusion Matrix: Detailed prediction breakdown
+📊 Dataset
+Dataset Information
+Source: Kaggle Credit Card Fraud Detection Dataset
+File: creditcard.csv
+Size: 284,807 transactions
+Features: 30 (Time, V1-V28, Amount)
+Target: Class (0 = Legitimate, 1 = Fraud)
+Imbalance: Only 0.172% fraudulent transactions
+Features Description
+Time: Seconds elapsed between this transaction and the first transaction
+V1-V28: PCA-transformed features (anonymized for privacy)
+Amount: Transaction amount
+Class: Target variable (0 = Legitimate, 1 = Fraud)
+🛠️ Installation & Setup
+Prerequisites
+Python 3.8 or higher
+pip (Python package manager)
+Git (optional)
+Step 1: Clone or Download the Project
+# Option 1: Clone with Git
+git clone <repository-url>
+cd credit-card-fraud-app
+
+# Option 2: Download and extract the ZIP file
+Step 2: Download the Dataset
+Download the dataset from Kaggle
+Place creditcard.csv in the dataset/ folder
+Step 3: Install Dependencies
 pip install -r requirements.txt
-Download dataset
-
-From: https://www.kaggle.com/mlg-ulb/creditcardfraud
-
-Place in: dataset/creditcard.csv
-
-Train models
-
-bash
+Step 4: Train the Models
 cd model
 python train_model.py
 cd ..
-Run application
+This will:
 
-bash
+Load and preprocess the dataset
+Train multiple models with different imbalance handling techniques
+Generate evaluation metrics
+Save trained models and visualizations
+Create performance comparison reports
+Note: Training may take 5-15 minutes depending on your system.
+
+Step 5: Run the Web Application
 python app.py
-Open browser  
-Navigate to: http://localhost:5000
+The application will start at: http://localhost:5000
 
-Verification
+🌐 Using the Web Application
+Home Page (/)
+Project overview and features
+Dataset statistics
+Model information
+Navigation to other pages
+Dashboard (/dashboard)
+Model comparison metrics table
+Class distribution visualization
+ROC curves comparison
+Confusion matrix
+Feature importance analysis
+Key insights
+Prediction Page (/predict)
+Select ML model
+Enter transaction details (Time, V1-V28, Amount)
+Use sample data buttons for quick testing
+Get real-time fraud prediction
+View fraud probability scores
+📈 Model Performance
+Expected Results
+Model	Accuracy	Precision	Recall	F1-Score	ROC-AUC
+Logistic Regression (Original)	~0.999	~0.88	~0.61	~0.72	~0.97
+Logistic Regression (SMOTE)	~0.974	~0.06	~0.92	~0.11	~0.97
+Logistic Regression (Undersampling)	~0.976	~0.06	~0.91	~0.11	~0.97
+Logistic Regression (Weighted)	~0.974	~0.06	~0.92	~0.11	~0.97
+Random Forest	~0.999	~0.93	~0.76	~0.84	~0.98
+Note: Actual results may vary slightly based on random state and system configuration.
 
-bash
-python test_setup.py
+Why Recall is Important
+In fraud detection, Recall is the most critical metric because:
+
+Missing a fraud (False Negative) is more costly than a false alarm (False Positive)
+High recall ensures we catch most fraudulent transactions
+Financial institutions prioritize catching fraud over minimizing false alarms
+🚀 Deployment on AWS EC2
+Prerequisites
+AWS Account
+EC2 instance (Ubuntu 20.04 or later recommended)
+Security group with port 5000 open
+Deployment Steps
+1. Launch EC2 Instance
+# Choose Ubuntu Server 20.04 LTS
+# Instance type: t2.medium or higher (for model training)
+# Configure security group to allow:
+#   - SSH (port 22) from your IP
+#   - Custom TCP (port 5000) from anywhere (0.0.0.0/0)
+2. Connect to EC2 Instance
+ssh -i your-key.pem ubuntu@your-ec2-public-ip
+3. Install Dependencies
+# Update system
+sudo apt update && sudo apt upgrade -y
+
+# Install Python and pip
+sudo apt install python3-pip python3-venv -y
+
+# Install Git
+sudo apt install git -y
+4. Clone Project and Setup
+# Clone repository
+git clone <repository-url>
+cd credit-card-fraud-app
+
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate
+
+# Install requirements
+pip install -r requirements.txt
+5. Upload Dataset
+# Option 1: Use SCP from local machine
+scp -i your-key.pem creditcard.csv ubuntu@your-ec2-public-ip:~/credit-card-fraud-app/dataset/
+
+# Option 2: Download directly on EC2
+cd dataset
+wget <dataset-url>
+cd ..
+6. Train Models
+cd model
+python train_model.py
+cd ..
+7. Run Application
+# For testing
+python app.py
+
+# For production (using nohup)
+nohup python app.py > app.log 2>&1 &
+8. Access Application
+http://your-ec2-public-ip:5000
+Production Deployment (Optional)
+For production, use Gunicorn and Nginx:
+
+# Install Gunicorn
+pip install gunicorn
+
+# Run with Gunicorn
+gunicorn -w 4 -b 0.0.0.0:5000 app:app
+
+# Install and configure Nginx
+sudo apt install nginx -y
+# Configure Nginx as reverse proxy
+🧪 Testing the Application
+Test with Sample Data
+The prediction page includes two sample data buttons:
+
+Sample Legitimate: Pre-filled with a legitimate transaction
+Sample Fraud: Pre-filled with a fraudulent transaction
+Manual Testing
+Navigate to /predict
+Select a model
+Enter transaction details
+Click "Check Fraud"
+Review the prediction and probability scores
+API Testing (Optional)
+# Get model information
+curl http://localhost:5000/api/model-info
+📝 Model Explanation
+How It Works
+Data Preprocessing
+
+Load dataset
+Handle missing values
+Feature scaling using StandardScaler
+Stratified train-test split (80-20)
+Imbalance Handling
+
+Apply SMOTE, undersampling, and class weighting
+Compare performance of different techniques
+Model Training
+
+Train Logistic Regression and Random Forest
+Use cross-validation for robust evaluation
+Evaluation
+
+Calculate comprehensive metrics
+Generate visualizations
+Compare model performance
+Prediction
+
+Load trained model and scaler
+Scale input features
+Make prediction with probability scores
+Feature Importance
+The Random Forest model provides feature importance scores, showing which features (V1-V28, Time, Amount) contribute most to fraud detection.
+
+🔧 Troubleshooting
+Common Issues
+Issue: Models not loading
+
+# Solution: Train models first
+cd model
+python train_model.py
+cd ..
+Issue: Dataset not found
+
+# Solution: Ensure creditcard.csv is in dataset/ folder
+ls dataset/creditcard.csv
+Issue: Port 5000 already in use
+
+# Solution: Change port in app.py
+# Or kill the process using port 5000
+lsof -ti:5000 | xargs kill -9  # Linux/Mac
+netstat -ano | findstr :5000   # Windows
+Issue: Visualizations not displaying
+
+# Solution: Ensure matplotlib backend is set correctly
+# Check static/images/ folder for generated images
+ls static/images/
