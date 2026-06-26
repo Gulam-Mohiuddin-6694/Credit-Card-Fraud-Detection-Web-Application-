@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Credit Card Fraud Detection - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt"></i> Fraud Detection
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/predict">Predict</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-3 fw-bold mb-4">
+                <i class="fas fa-credit-card"></i> Credit Card Fraud Detection
+            </h1>
+            <p class="lead mb-4">Machine Learning-Powered Real-Time Fraud Detection System</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="/dashboard" class="btn btn-primary btn-lg">
+                    <i class="fas fa-chart-line"></i> View Dashboard
+                </a>
+                <a href="/predict" class="btn btn-success btn-lg">
+                    <i class="fas fa-search"></i> Check Transaction
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">
+                            <i class="fas fa-info-circle text-primary"></i> Project Overview
+                        </h2>
+                        <p class="lead">
+                            This web application uses advanced machine learning algorithms to detect fraudulent credit card transactions in real-time. 
+                            The system is trained on a highly imbalanced dataset and employs multiple techniques to handle class imbalance effectively.
+                        </p>
+                        <hr>
+                        <h4 class="mt-4">Key Features:</h4>
+                        <div class="row mt-3">
+                            <div class="col-md-6">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check-circle text-success"></i> Multiple ML algorithms comparison</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> SMOTE & Undersampling techniques</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Real-time fraud prediction</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Comprehensive evaluation metrics</li>
+                                </ul>
+                            </div>
+                            <div class="col-md-6">
+                                <ul class="feature-list">
+                                    <li><i class="fas fa-check-circle text-success"></i> Interactive visualizations</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Feature importance analysis</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> ROC-AUC comparison</li>
+                                    <li><i class="fas fa-check-circle text-success"></i> Confusion matrix analysis</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">
+                            <i class="fas fa-database text-info"></i> Dataset Overview
+                        </h2>
+                        <div class="row text-center">
+                            <div class="col-md-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-list-ol"></i>
+                                    </div>
+                                    <h3>{{ "{:,}".format(dataset_info.total_transactions) }}</h3>
+                                    <p>Total Transactions</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon text-danger">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </div>
+                                    <h3>{{ "{:,}".format(dataset_info.fraud_cases) }}</h3>
+                                    <p>Fraud Cases</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon text-success">
+                                        <i class="fas fa-check"></i>
+                                    </div>
+                                    <h3>{{ "{:,}".format(dataset_info.legitimate_cases) }}</h3>
+                                    <p>Legitimate Cases</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="stat-card">
+                                    <div class="stat-icon text-warning">
+                                        <i class="fas fa-percentage"></i>
+                                    </div>
+                                    <h3>{{ "%.3f"|format(dataset_info.fraud_percentage) }}%</h3>
+                                    <p>Fraud Percentage</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-warning mt-4" role="alert">
+                            <i class="fas fa-info-circle"></i> 
+                            <strong>Note:</strong> This dataset is highly imbalanced, which is typical in fraud detection scenarios. 
+                            Our models use advanced techniques like SMOTE and class weighting to handle this imbalance effectively.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">
+                            <i class="fas fa-robot text-success"></i> Machine Learning Models
+                        </h2>
+                        <p>We have implemented and compared multiple machine learning algorithms:</p>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="model-card">
+                                    <h5><i class="fas fa-brain"></i> Logistic Regression</h5>
+                                    <p>Tested with different imbalance handling techniques:</p>
+                                    <ul>
+                                        <li>Original (Imbalanced)</li>
+                                        <li>SMOTE (Oversampling)</li>
+                                        <li>Random Undersampling</li>
+                                        <li>Class Weight Balancing</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="model-card">
+                                    <h5><i class="fas fa-tree"></i> Random Forest Classifier</h5>
+                                    <p>Ensemble learning method with:</p>
+                                    <ul>
+                                        <li>100 decision trees</li>
+                                        <li>Balanced class weights</li>
+                                        <li>Feature importance analysis</li>
+                                        <li>High recall for fraud detection</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center mt-4">
+                            <a href="/dashboard" class="btn btn-primary">
+                                <i class="fas fa-chart-bar"></i> View Model Comparison
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card shadow-sm mb-4">
+                    <div class="card-body">
+                        <h2 class="card-title mb-4">
+                            <i class="fas fa-chart-line text-danger"></i> Evaluation Metrics
+                        </h2>
+                        <p>Our models are evaluated using comprehensive metrics:</p>
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <i class="fas fa-bullseye"></i>
+                                    <h5>Accuracy</h5>
+                                    <p>Overall correctness of predictions</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <i class="fas fa-crosshairs"></i>
+                                    <h5>Precision</h5>
+                                    <p>Accuracy of fraud predictions</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <i class="fas fa-search"></i>
+                                    <h5>Recall</h5>
+                                    <p>Ability to detect all frauds</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <i class="fas fa-balance-scale"></i>
+                                    <h5>F1-Score</h5>
+                                    <p>Harmonic mean of precision & recall</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <i class="fas fa-chart-area"></i>
+                                    <h5>ROC-AUC</h5>
+                                    <p>Model's discrimination ability</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="metric-card">
+                                    <i class="fas fa-table"></i>
+                                    <h5>Confusion Matrix</h5>
+                                    <p>Detailed prediction breakdown</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="alert alert-info mt-4" role="alert">
+                            <i class="fas fa-lightbulb"></i> 
+                            <strong>Important:</strong> In fraud detection, <strong>Recall</strong> is crucial as it measures our ability 
+                            to catch all fraudulent transactions, even if it means some false alarms.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">
+                <i class="fas fa-shield-alt"></i> Credit Card Fraud Detection System | 
+                Built with Flask, Scikit-learn & Bootstrap
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predict - Credit Card Fraud Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-shield-alt"></i> Fraud Detection
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/dashboard">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/predict">Predict</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container my-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">
+                <i class="fas fa-search text-success"></i> Fraud Detection Prediction
+            </h1>
+            <p class="lead">Enter transaction details to check for potential fraud</p>
+        </div>
+
+        {% if result %}
+        <div class="row mb-4">
+            <div class="col-md-8 offset-md-2">
+                <div class="card shadow-lg {% if result.prediction_class == 1 %}border-danger{% else %}border-success{% endif %}">
+                    <div class="card-header {% if result.prediction_class == 1 %}bg-danger{% else %}bg-success{% endif %} text-white text-center">
+                        <h3 class="mb-0">
+                            <i class="fas {% if result.prediction_class == 1 %}fa-exclamation-triangle{% else %}fa-check-circle{% endif %}"></i>
+                            Prediction Result
+                        </h3>
+                    </div>
+                    <div class="card-body text-center">
+                        <h2 class="display-4 fw-bold {% if result.prediction_class == 1 %}text-danger{% else %}text-success{% endif %}">
+                            {{ result.prediction }}
+                        </h2>
+                        <hr>
+                        <div class="row mt-4">
+                            <div class="col-md-6">
+                                <div class="prediction-detail">
+                                    <h5>Fraud Probability</h5>
+                                    <div class="progress" style="height: 30px;">
+                                        <div class="progress-bar bg-danger" role="progressbar" 
+                                             style="width: {{ (result.fraud_probability * 100)|round(2) }}%"
+                                             aria-valuenow="{{ (result.fraud_probability * 100)|round(2) }}" 
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            {{ "%.2f"|format(result.fraud_probability * 100) }}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="prediction-detail">
+                                    <h5>Legitimate Probability</h5>
+                                    <div class="progress" style="height: 30px;">
+                                        <div class="progress-bar bg-success" role="progressbar" 
+                                             style="width: {{ (result.legit_probability * 100)|round(2) }}%"
+                                             aria-valuenow="{{ (result.legit_probability * 100)|round(2) }}" 
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            {{ "%.2f"|format(result.legit_probability * 100) }}%
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="text-muted">
+                                <i class="fas fa-robot"></i> Model Used: <strong>{{ result.model_used.replace('_', ' ') }}</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-10 offset-md-1">
+                <div class="card shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0"><i class="fas fa-edit"></i> Transaction Details</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="POST" action="/predict" id="predictionForm">
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="model" class="form-label">
+                                        <i class="fas fa-robot"></i> Select Model
+                                    </label>
+                                    <select class="form-select" id="model" name="model">
+                                        {% for model_name in models %}
+                                        <option value="{{ model_name }}" {% if model_name == 'Random_Forest' %}selected{% endif %}>
+                                            {{ model_name.replace('_', ' ') }}
+                                        </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="Time" class="form-label">Time</label>
+                                    <input type="number" step="any" class="form-control" id="Time" name="Time" 
+                                           value="{% if form_data %}{{ form_data.Time }}{% else %}0{% endif %}" required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="Amount" class="form-label">Amount ($)</label>
+                                    <input type="number" step="any" class="form-control" id="Amount" name="Amount" 
+                                           value="{% if form_data %}{{ form_data.Amount }}{% else %}100{% endif %}" required>
+                                </div>
+                            </div>
+
+                            <hr>
+                            <h5 class="mb-3">PCA Features (V1 - V28)</h5>
+                            <div class="alert alert-info" role="alert">
+                                <i class="fas fa-info-circle"></i> 
+                                These are PCA-transformed features from the original transaction data. 
+                                Enter values or use the sample data button below.
+                            </div>
+
+                            <div class="row">
+                                {% for i in range(1, 29) %}
+                                <div class="col-md-3 mb-3">
+                                    <label for="V{{ i }}" class="form-label">V{{ i }}</label>
+                                    <input type="number" step="any" class="form-control" id="V{{ i }}" name="V{{ i }}" 
+                                           value="{% if form_data %}{{ form_data['V' ~ i] }}{% else %}0{% endif %}" required>
+                                </div>
+                                {% endfor %}
+                            </div>
+
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-center mt-4">
+                                <button type="button" class="btn btn-secondary btn-lg" onclick="fillSampleLegit()">
+                                    <i class="fas fa-check"></i> Sample Legitimate
+                                </button>
+                                <button type="button" class="btn btn-warning btn-lg" onclick="fillSampleFraud()">
+                                    <i class="fas fa-exclamation-triangle"></i> Sample Fraud
+                                </button>
+                                <button type="submit" class="btn btn-success btn-lg">
+                                    <i class="fas fa-search"></i> Check Fraud
+                                </button>
+                                <button type="reset" class="btn btn-danger btn-lg">
+                                    <i class="fas fa-redo"></i> Reset
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-10 offset-md-1">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5><i class="fas fa-question-circle text-info"></i> How to Use</h5>
+                        <ol>
+                            <li>Select a machine learning model from the dropdown</li>
+                            <li>Enter the transaction Time and Amount</li>
+                            <li>Fill in the PCA features (V1-V28) or use sample data buttons</li>
+                            <li>Click "Check Fraud" to get the prediction</li>
+                            <li>Review the fraud probability and prediction result</li>
+                        </ol>
+                        <p class="text-muted mb-0">
+                            <i class="fas fa-lightbulb"></i> 
+                            <strong>Tip:</strong> Use the sample data buttons to quickly test the system with pre-filled values.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <div class="container">
+            <p class="mb-0">
+                <i class="fas fa-shield-alt"></i> Credit Card Fraud Detection System | 
+                Built with Flask, Scikit-learn & Bootstrap
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Sample legitimate transaction
+        function fillSampleLegit() {
+            document.getElementById('Time').value = '406';
+            document.getElementById('Amount').value = '100.00';
+            const legitValues = [-1.359807, -0.072781, 2.536347, 1.378155, -0.338321, 0.462388, 0.239599, 
+                               0.098698, 0.363787, 0.090794, -0.551600, -0.617801, -0.991390, -0.311169,
+                               1.468177, -0.470401, 0.207971, 0.025791, 0.403993, 0.251412, -0.018307,
+                               0.277838, -0.110474, 0.066928, 0.128539, -0.189115, 0.133558, -0.021053];
+            for (let i = 1; i <= 28; i++) {
+                document.getElementById('V' + i).value = legitValues[i-1].toFixed(6);
+            }
+        }
+
+        // Sample fraudulent transaction
+        function fillSampleFraud() {
+            document.getElementById('Time').value = '80000';
+            document.getElementById('Amount').value = '1.00';
+            const fraudValues = [-4.771948, 3.623778, -7.033281, 4.542029, -3.151225, -1.397737, -5.568731,
+                               0.570636, -2.581123, -4.289247, 3.202895, -3.110754, 0.197145, -4.830055,
+                               -1.045434, -2.301652, 1.037834, -0.380476, 0.084245, 0.392204, -0.430426,
+                               0.623708, -0.273709, -0.087768, -0.208254, -0.559825, 0.029117, -0.097193];
+            for (let i = 1; i <= 28; i++) {
+                document.getElementById('V' + i).value = fraudValues[i-1].toFixed(6);
+            }
+        }
+    </script>
+</body>
+</html>
