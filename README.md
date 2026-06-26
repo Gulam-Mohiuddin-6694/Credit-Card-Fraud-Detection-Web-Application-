@@ -1,192 +1,203 @@
-📋 Project Summary - Credit Card Fraud Detection Web Application
+📋 Project Summary – Credit Card Fraud Detection Web Application
 🎯 Project Overview
-A complete, production-ready web application for detecting fraudulent credit card transactions using machine learning. Built with Flask, Scikit-learn, and Bootstrap.
+A complete, production‑ready web application for detecting fraudulent credit card transactions using machine learning. Built with Flask, Scikit‑learn, and Bootstrap.
 
 ✅ Completed Components
 1. Backend (Flask Application)
-✅ app.py - Main Flask application with 3 routes
-Home page route (/)
-Dashboard route (/dashboard)
-Prediction route (/predict)
-API endpoint (/api/model-info)
-✅ Error handling and logging
-✅ Model loading and prediction logic
-✅ Form validation and input processing
+app.py – Main Flask app with routes:
+
+/ Home page
+
+/dashboard Dashboard
+
+/predict Prediction
+
+/api/model-info API endpoint
+
+Error handling and logging
+
+Model loading and prediction logic
+
+Form validation and input processing
+
 2. Machine Learning Pipeline
-✅ model/train_model.py - Complete ML training pipeline
-Data loading and preprocessing
+model/train_model.py – ML training pipeline:
+
+Data loading & preprocessing
+
 Feature scaling with StandardScaler
-Stratified train-test split (80-20)
-Multiple imbalance handling techniques:
-SMOTE (Synthetic Minority Oversampling)
-Random Undersampling
-Class Weight Balancing
-Model training:
-Logistic Regression (4 variants)
-Random Forest Classifier
-Comprehensive evaluation metrics
-Visualization generation
+
+Stratified train‑test split (80‑20)
+
+Imbalance handling: SMOTE, Random Undersampling, Class Weight Balancing
+
+Models: Logistic Regression (4 variants), Random Forest Classifier
+
+Evaluation metrics & visualization
+
 Model persistence (pickle)
+
 3. Frontend (HTML/CSS/Bootstrap)
-✅ templates/index.html - Home page
-Project overview
-Dataset statistics
-Feature highlights
-Model information
-Navigation
-✅ templates/dashboard.html - Analytics dashboard
-Model comparison table
-Class distribution chart
-ROC curves comparison
-Confusion matrix
-Feature importance visualization
-Key insights
-✅ templates/predict.html - Prediction interface
-Model selection dropdown
-Input form for all 30 features
-Sample data buttons (legit & fraud)
-Real-time prediction display
-Probability visualization
-✅ static/css/style.css - Custom styling
-Responsive design
-Modern UI components
-Animations and transitions
-Mobile-friendly layout
+templates/index.html – Home page
+
+templates/dashboard.html – Analytics dashboard
+
+templates/predict.html – Prediction interface
+
+static/css/style.css – Custom styling (responsive, modern UI, animations)
+
 4. Documentation
-✅ README.md - Comprehensive documentation
-Project overview
-Installation instructions
-Usage guide
-Model explanation
-Deployment instructions
-✅ QUICKSTART.md - Quick setup guide
-✅ AWS_DEPLOYMENT.md - Detailed AWS EC2 deployment guide
-✅ dataset/README.md - Dataset instructions
+README.md – Comprehensive documentation
+
+QUICKSTART.md – Quick setup guide
+
+AWS_DEPLOYMENT.md – AWS EC2 deployment guide
+
+dataset/README.md – Dataset instructions
+
 5. Utilities
-✅ requirements.txt - Python dependencies
-✅ .gitignore - Git ignore rules
-✅ test_setup.py - Setup verification script
-✅ generate_sample_data.py - Sample data generator
+requirements.txt – Python dependencies
+
+.gitignore – Git ignore rules
+
+test_setup.py – Setup verification script
+
+generate_sample_data.py – Sample data generator
+
 📊 Machine Learning Features
 Models Implemented
-Logistic Regression - 4 variants
+Logistic Regression (4 variants: Original, SMOTE, Undersampling, Class Weight Balancing)
 
-Original (imbalanced)
-SMOTE
-Random Undersampling
-Class Weight Balancing
-Random Forest - Primary model
+Random Forest (100 estimators, balanced class weights, feature importance analysis)
 
-100 estimators
-Balanced class weights
-Feature importance analysis
 Evaluation Metrics
-✅ Accuracy
-✅ Precision
-✅ Recall (emphasized for fraud detection)
-✅ F1-Score
-✅ ROC-AUC Score
-✅ Confusion Matrix
-✅ ROC Curves
-Visualizations Generated
-✅ Class distribution bar chart
-✅ ROC curves comparison (all models)
-✅ Confusion matrix heatmap
-✅ Feature importance chart (top 15)
+Accuracy, Precision, Recall, F1‑Score
+
+ROC‑AUC Score, Confusion Matrix, ROC Curves
+
+Visualizations
+Class distribution chart
+
+ROC curves comparison
+
+Confusion matrix heatmap
+
+Feature importance chart (top 15)
+
 🌐 Web Application Features
 Home Page
 Project description
+
 Dataset overview with statistics
-Model information
-Feature highlights
-Navigation to other pages
+
+Model information & highlights
+
 Dashboard
 Model comparison metrics table
+
 Interactive visualizations
-Performance analysis
-Key insights and recommendations
+
+Performance analysis & insights
+
 Prediction Page
 Model selection dropdown
-Input form for 30 features (Time, V1-V28, Amount)
-Sample data buttons for quick testing
-Real-time prediction results
-Fraud probability visualization
-Form validation
+
+Input form for 30 features (Time, V1–V28, Amount)
+
+Sample data buttons (legit & fraud)
+
+Real‑time prediction results with fraud probability visualization
+
 🛠️ Technical Stack
 Backend
-Framework: Flask 3.0.0
-ML Libraries:
-scikit-learn 1.3.2
-imbalanced-learn 0.11.0
-Data Processing:
-pandas 2.1.4
-numpy 1.26.2
-Visualization:
-matplotlib 3.8.2
-seaborn 0.13.0
+
+Flask 3.0.0
+
+scikit‑learn 1.3.2
+
+imbalanced‑learn 0.11.0
+
+pandas 2.1.4, numpy 1.26.2
+
+matplotlib 3.8.2, seaborn 0.13.0
+
 Frontend
-Framework: Bootstrap 5.3.0
-Icons: Font Awesome 6.4.0
-Styling: Custom CSS with animations
+
+Bootstrap 5.3.0
+
+Font Awesome 6.4.0
+
+Custom CSS with animations
+
 Deployment
-Local: Python + Flask development server
+
+Local: Python + Flask dev server
+
 Production: Gunicorn + Nginx (optional)
+
 Cloud: AWS EC2 (documented)
+
 📁 Project Structure
+Code
 credit-card-fraud-app/
-├── app.py                          # Flask application
-├── requirements.txt                # Dependencies
-├── README.md                       # Main documentation
-├── QUICKSTART.md                   # Quick start guide
-├── AWS_DEPLOYMENT.md               # AWS deployment guide
-├── test_setup.py                   # Setup verification
-├── generate_sample_data.py         # Sample data generator
-├── .gitignore                      # Git ignore rules
+├── app.py
+├── requirements.txt
+├── README.md
+├── QUICKSTART.md
+├── AWS_DEPLOYMENT.md
+├── test_setup.py
+├── generate_sample_data.py
+├── .gitignore
 │
 ├── model/
-│   ├── train_model.py              # ML training script
-│   ├── model.pkl                   # Trained model (generated)
-│   ├── scaler.pkl                  # Feature scaler (generated)
-│   ├── all_models.pkl              # All models (generated)
-│   ├── results.pkl                 # Results (generated)
-│   └── feature_importance.csv      # Feature data (generated)
+│   ├── train_model.py
+│   ├── model.pkl
+│   ├── scaler.pkl
+│   ├── all_models.pkl
+│   ├── results.pkl
+│   └── feature_importance.csv
 │
 ├── templates/
-│   ├── index.html                  # Home page
-│   ├── dashboard.html              # Dashboard
-│   └── predict.html                # Prediction page
+│   ├── index.html
+│   ├── dashboard.html
+│   └── predict.html
 │
 ├── static/
-│   ├── css/
-│   │   └── style.css               # Custom styles
-│   └── images/                     # Visualizations (generated)
+│   ├── css/style.css
+│   └── images/
 │       ├── class_distribution.png
 │       ├── confusion_matrix.png
 │       ├── roc_curves.png
 │       └── feature_importance.png
 │
 └── dataset/
-    ├── README.md                   # Dataset instructions
-    └── creditcard.csv              # Dataset (download separately)
+    ├── README.md
+    └── creditcard.csv
 🚀 Setup Instructions
-Quick Setup (5 Steps)
-Install Dependencies
+Install dependencies
 
+bash
 pip install -r requirements.txt
-Download Dataset
+Download dataset
 
-Get from: https://www.kaggle.com/mlg-ulb/creditcardfraud
+From: https://www.kaggle.com/mlg-ulb/creditcardfraud
+
 Place in: dataset/creditcard.csv
-Train Models
 
+Train models
+
+bash
 cd model
 python train_model.py
 cd ..
-Run Application
+Run application
 
+bash
 python app.py
-Open Browser
-
+Open browser  
 Navigate to: http://localhost:5000
+
 Verification
-python test_setup.py  
+
+bash
+python test_setup.py
